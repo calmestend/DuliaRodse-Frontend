@@ -2,7 +2,7 @@ import type { ClientServerData, Session, User } from '../types';
 import { v4 as uuid } from 'uuid';
 import { get } from 'svelte/store';
 import { clientsStores, sessionsStores, usersStores } from './stores';
-import { validationClientRegex } from './validations';
+import { validationClientRegex, validationString } from './validations';
 import { createClientQuery } from './queries';
 
 function createSessionById(userId: number) {
@@ -54,4 +54,26 @@ export async function createClient(client: ClientServerData, username: string, p
 	});
 
 	return createSessionById(currentUser?.id ?? 0);
+}
+
+export async function createSessionByUsername(username: string, password: string) {
+	const usernameValidationResult = validationString(username);
+	if (usernameValidationResult.error) {
+		throw new Error('Nombre de usuario invalido');
+	}
+
+	const currentUsers = get(usersStores);
+	const userFound = currentUsers.find((user) => {
+		return user.name === username && user.password === password;
+	});
+	if (!userFound) {
+		const userWithSameUsername = currentUsers.find((user) => user.name === username);
+
+		if (userWithSameUsername) {
+			throw new Error('Contrasena incorrecta');
+		}
+		throw new Error('Usuario no encontrado');
+	}
+
+	return createSessionById(userFound.id);
 }

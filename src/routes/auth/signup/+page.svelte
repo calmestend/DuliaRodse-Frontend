@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
 </script>
@@ -42,3 +43,8 @@
 
 	<button>Registrar</button>
 </form>
+<button
+	on:click={() => {
+		goto('/auth/login');
+	}}>Iniciar Sesion</button
+>
