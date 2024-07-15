@@ -1,0 +1,57 @@
+import type { ClientServerData, Session, User } from '../types';
+import { v4 as uuid } from 'uuid';
+import { get } from 'svelte/store';
+import { clientsStores, sessionsStores, usersStores } from './stores';
+import { validationClientRegex } from './validations';
+import { createClientQuery } from './queries';
+
+function createSessionById(userId: number) {
+	const users = get(usersStores);
+	const user = users.find((user) => user.id === userId);
+
+	if (!user) throw new Error('Usuario no encontrado');
+
+	const newSession: Session = {
+		id: uuid(),
+		userId: user.id,
+		userRole: user.role
+	};
+
+	sessionsStores.update((previousSessions) => {
+		const filteredSessions = previousSessions.filter((session) => session.userId !== userId);
+		return [...filteredSessions, newSession];
+	});
+
+	return newSession;
+}
+
+export async function createClient(client: ClientServerData, username: string, password: string) {
+	validationClientRegex(client, username, password);
+
+	let currentUsers = get(usersStores);
+	console.log(currentUsers);
+	const currentClients = get(clientsStores);
+	console.log(currentClients);
+
+	const duplicateName = currentUsers.find((user) => user.name === username);
+	if (duplicateName) throw new Error('Ya existe este usuario');
+
+	const duplicateEmail = currentClients.find((cli) => cli.email === client.EMAIL_CLIE);
+	if (duplicateEmail) throw new Error('Este email ya pertenece a un usuario');
+
+	const duplicatePhoneNumber = currentClients.find((cli) => cli.phoneNumber === client.TEL_CLIE);
+	if (duplicatePhoneNumber) throw new Error('Este numero telefonico ya pertenece a un usuario');
+
+	await createClientQuery(client, username, password);
+
+	currentUsers = get(usersStores);
+	console.log(currentUsers);
+
+	const currentUser: User | undefined = currentUsers.find((user) => {
+		if (user.name === username) {
+			return user.id;
+		}
+	});
+
+	return createSessionById(currentUser?.id ?? 0);
+}
