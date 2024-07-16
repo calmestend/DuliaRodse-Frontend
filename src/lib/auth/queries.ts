@@ -41,7 +41,6 @@ export async function createClientQuery(
 		const getClients = await fetch('http://localhost/duliarodse/back/api/cliente/read.php');
 		const parsedGetClients = await getClients.json();
 		const clients: ClientServerData[] = parsedGetClients.data;
-		console.log(clients);
 
 		const clientCreated: ClientServerData | undefined = clients.find(
 			(cli) => cli.ID_USU === user.id

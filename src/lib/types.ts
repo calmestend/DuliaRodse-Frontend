@@ -53,3 +53,65 @@ export type Session = {
 	userId: number;
 	userRole: string;
 };
+
+export type BranchServerLoad = {
+	NO_SUC: number;
+	COL_SUC: string;
+	CALLE_SUC: string;
+	NOINT_SUC: string;
+	NOEXT_SUC: string;
+	CP_SUC: string;
+	NOM_CIUDAD: string;
+	NOM_ESTADO: string;
+};
+
+export type BranchServerData = {
+	NO_SUC: number;
+	COL_SUC: string;
+	CALLE_SUC: string;
+	NOINT_SUC: string;
+	NOEXT_SUC: string;
+	CP_SUC: string;
+	CVE_CIUDAD: number;
+};
+
+export type Branch = {
+	id: number;
+	neighborhood: string;
+	street: string;
+	intNumber: string;
+	extNumber: string;
+	zipCode: string;
+	cityName: string;
+	stateName: string;
+};
+
+export type ProductInventoryServerLoad = {
+	NO_SUC: number;
+	NO_INV: number;
+	EXIST_INV: string;
+	ID_PRO: string;
+	NOM_PRO: string;
+	GRAM_PRO: string;
+	COS_PRO: string;
+	PREC_PRO: string;
+	IMG_PRO: string;
+	NOM_CAT: string;
+	AROMA_PRO: string;
+	ACTIVO: string;
+};
+
+export type ProductInventory = {
+	branchId: number;
+	inventoryId: number;
+	existence: number;
+	id: string;
+	name: string;
+	grammage: number;
+	cost: number;
+	price: number;
+	img: string;
+	nameCategorie: string;
+	scent: string;
+	active: boolean;
+};

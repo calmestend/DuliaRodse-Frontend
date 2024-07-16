@@ -29,9 +29,7 @@ export async function createClient(client: ClientServerData, username: string, p
 	validationClientRegex(client, username, password);
 
 	let currentUsers = get(usersStores);
-	console.log(currentUsers);
 	const currentClients = get(clientsStores);
-	console.log(currentClients);
 
 	const duplicateName = currentUsers.find((user) => user.name === username);
 	if (duplicateName) throw new Error('Ya existe este usuario');
@@ -45,7 +43,6 @@ export async function createClient(client: ClientServerData, username: string, p
 	await createClientQuery(client, username, password);
 
 	currentUsers = get(usersStores);
-	console.log(currentUsers);
 
 	const currentUser: User | undefined = currentUsers.find((user) => {
 		if (user.name === username) {

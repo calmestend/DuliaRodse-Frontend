@@ -5,9 +5,6 @@ export const usersStores = writable<User[]>([]);
 export const sessionsStores = writable<Session[]>([]);
 export const clientsStores = writable<Client[]>([]);
 
-usersStores.subscribe(console.log);
-clientsStores.subscribe(console.log);
-
 fillUsersStores();
 fillClientsStores();
 
