@@ -115,3 +115,8 @@ export type ProductInventory = {
 	scent: string;
 	active: boolean;
 };
+
+export type ProductShoppingCart = {
+	inventoryId: number;
+	quantity: number;
+};
