@@ -77,3 +77,14 @@ export async function createSessionByUsername(username: string, password: string
 
 	return createSessionById(userFound.id);
 }
+
+export function signOut(id: string) {
+	const sessions = get(sessionsStores);
+	const sessionFound = sessions.find((session) => session.id === id);
+
+	if (!sessionFound) throw new Error('Sesion no encontrada');
+
+	sessionsStores.update((previousSessions) => {
+		return previousSessions.filter((session) => session != sessionFound);
+	});
+}

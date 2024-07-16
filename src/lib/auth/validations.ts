@@ -1,6 +1,8 @@
 // TODO: Change message orthography
 
-import type { ClientServerData } from '../types';
+import { get } from 'svelte/store';
+import type { ClientServerData, Session, User } from '../types';
+import { sessionsStores, usersStores } from './stores';
 
 export function validationString(string: string) {
 	const stringRegex = /^[a-zA-Z0-9\s]+$/;
@@ -101,4 +103,20 @@ export function validationClientRegex(
 	if (passwordValidationResult.error) {
 		throw new Error(passwordValidationResult.message);
 	}
+}
+export function validationSession(id: string) {
+	const sessions: Session[] = get(sessionsStores);
+	const sessionResult = sessions.find((session) => session.id === id);
+
+	if (!sessionResult) throw new Error('La sesion no existe');
+
+	const users: User[] = get(usersStores);
+	const userResult = users.find((user) => user.id === sessionResult.userId);
+
+	if (!userResult) throw new Error('El usuario no existe');
+
+	return {
+		sessionResult,
+		userResult
+	};
 }
