@@ -54,7 +54,7 @@ export type Session = {
 	userRole: string;
 };
 
-export type BranchServerLoad = {
+export type BranchServerData = {
 	NO_SUC: number;
 	COL_SUC: string;
 	CALLE_SUC: string;
@@ -65,7 +65,7 @@ export type BranchServerLoad = {
 	NOM_ESTADO: string;
 };
 
-export type BranchServerData = {
+export type BranchServerLoad = {
 	NO_SUC: number;
 	COL_SUC: string;
 	CALLE_SUC: string;
@@ -86,7 +86,7 @@ export type Branch = {
 	stateName: string;
 };
 
-export type ProductInventoryServerLoad = {
+export type ProductInventoryServerData = {
 	NO_SUC: number;
 	NO_INV: number;
 	EXIST_INV: string;
@@ -98,7 +98,7 @@ export type ProductInventoryServerLoad = {
 	IMG_PRO: string;
 	NOM_CAT: string;
 	AROMA_PRO: string;
-	ACTIVO: string;
+	ACTIVO: number;
 };
 
 export type ProductInventory = {
