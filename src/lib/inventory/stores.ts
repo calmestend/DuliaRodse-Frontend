@@ -9,11 +9,6 @@ import { writable } from 'svelte/store';
 export const branchesStores = writable<Branch[]>([]);
 export const productsInventoryStores = writable<ProductInventory[]>([]);
 
-// Delete console.logs
-branchesStores.subscribe(console.log);
-productsInventoryStores.subscribe(console.log);
-
-fillBranchesStores();
 fillProductsInventoryStores();
 
 export async function fillBranchesStores() {
