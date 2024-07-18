@@ -1,28 +1,31 @@
-import type { ProductShoppingCart } from '$lib/types';
+import type { ProductInventory, ProductShoppingCart } from '$lib/types';
 import { writable } from 'svelte/store';
 
-export const shoppingCart = writable<ProductShoppingCart[]>();
+export const shoppingCart = writable<ProductShoppingCart[]>([]);
 
-export function addProductToShoppingCart(inventoryId: number, quantity: number) {
+shoppingCart.subscribe(console.log);
+
+export function addProductToShoppingCart(product: ProductInventory, quantity: number) {
 	shoppingCart.update((previousProducts) => {
-		const existingProduct = previousProducts.find((product) => product.inventoryId === inventoryId);
+		const existingProduct = previousProducts.find(
+			(currentProduct) => currentProduct.inventoryId === product.inventoryId
+		);
 		if (existingProduct) {
 			existingProduct.quantity += quantity;
 
 			return previousProducts;
 		} else {
-			const newProduct: ProductShoppingCart = {
-				quantity: quantity,
-				inventoryId: inventoryId
-			};
+			const newProduct: ProductShoppingCart = { ...product, quantity };
 
 			return [...previousProducts, newProduct];
 		}
 	});
 }
-export function removeProductFromShoppingCart(inventoryId: number) {
+export function removeProductFromShoppingCart(product: ProductShoppingCart) {
 	shoppingCart.update((previousProducts) => {
-		return previousProducts.filter((product) => product.inventoryId !== inventoryId);
+		return previousProducts.filter(
+			(currentProduct) => currentProduct.inventoryId !== product.inventoryId
+		);
 	});
 }
 

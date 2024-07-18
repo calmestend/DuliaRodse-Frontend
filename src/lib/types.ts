@@ -101,7 +101,7 @@ export type ProductInventoryServerData = {
 	ACTIVO: number;
 };
 
-export type ProductInventory = {
+export interface ProductInventory {
 	branchId: number;
 	inventoryId: number;
 	existence: number;
@@ -114,9 +114,8 @@ export type ProductInventory = {
 	nameCategorie: string;
 	scent: string;
 	active: boolean;
-};
+}
 
-export type ProductShoppingCart = {
-	inventoryId: number;
+export interface ProductShoppingCart extends ProductInventory {
 	quantity: number;
-};
+}

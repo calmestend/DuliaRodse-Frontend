@@ -10,6 +10,7 @@
 		<li><a href="/">DuliaRodse</a></li>
 		<BranchSelection />
 		{#if data.authenticated}
+			<li><a href="/shoppingCart">Carrito de compras</a></li>
 			<form action="/?/logout" method="POST">
 				<button formaction="/?/logout">Log Out</button>
 			</form>

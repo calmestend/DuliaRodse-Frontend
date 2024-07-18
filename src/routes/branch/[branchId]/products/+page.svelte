@@ -2,19 +2,14 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { productsInventoryStores } from '$lib/inventory/stores';
-	import type { ProductInventory } from '$lib/types';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	const branchId = $page.params.branchId;
-	let products: ProductInventory[];
-	productsInventoryStores.subscribe((value) => (products = value));
 </script>
 
-<!--TODO: Create product card component-->
-<!--TODO: Add *Agregar al Carrito* Functionality Modal Window -->
-{#each products as product}
+{#each $productsInventoryStores as product}
 	{#if product.branchId === parseInt(branchId) && product.active && product.existence > 0}
 		<h2>{product.name}</h2>
 		<p>Sucursal: {product.branchId}</p>

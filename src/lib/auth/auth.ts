@@ -4,6 +4,8 @@ import { get } from 'svelte/store';
 import { clientsStores, sessionsStores, usersStores } from './stores';
 import { validationClientRegex, validationString } from './validations';
 import { createClientQuery } from './queries';
+import { browser } from '$app/environment';
+import { shoppingCart } from '$lib/shopping/stores';
 
 function createSessionById(userId: number) {
 	const users = get(usersStores);
@@ -84,4 +86,21 @@ export function signOut(id: string) {
 	sessionsStores.update((previousSessions) => {
 		return previousSessions.filter((session) => session != sessionFound);
 	});
+}
+
+export function recoverShoppingCart() {
+	if (browser) {
+		if (localStorage.shoppingCart) {
+			shoppingCart.set(JSON.parse(localStorage.shoppingCart));
+		}
+		shoppingCart.subscribe(
+			(cartProducts) => (localStorage.shoppingCart = JSON.stringify(cartProducts))
+		);
+	}
+}
+
+export function clearLocalStorage() {
+	if (browser) {
+		localStorage.clear();
+	}
 }

@@ -114,7 +114,6 @@ export function validationSession(id: string) {
 	const userResult = users.find((user) => user.id === sessionResult.userId);
 
 	if (!userResult) throw new Error('El usuario no existe');
-
 	return {
 		sessionResult,
 		userResult
