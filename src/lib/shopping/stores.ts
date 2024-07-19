@@ -28,16 +28,3 @@ export function removeProductFromShoppingCart(product: ProductShoppingCart) {
 		);
 	});
 }
-
-export function updateProductQuantity(inventoryId: number, newQuantity: number) {
-	shoppingCart.update((previousProducts) => {
-		const existingProduct = previousProducts.find((product) => product.inventoryId === inventoryId);
-
-		if (existingProduct) {
-			existingProduct.quantity = newQuantity;
-			return previousProducts;
-		} else {
-			return previousProducts;
-		}
-	});
-}
