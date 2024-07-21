@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import AddProduct from '$lib/components/AddProduct.svelte';
 	import { productsInventoryStores } from '$lib/inventory/stores';
 	import type { PageData } from './$types';
 
@@ -16,7 +17,7 @@
 		<p>Numero de inventario: {product.inventoryId}</p>
 		<hr />
 		{#if data.authenticated && data.admin === false}
-			<button>Agregar al Carrito</button>
+			<AddProduct {product} />
 		{/if}
 		<button on:click={() => goto(`/branch/${branchId}/products/${product.inventoryId}`)}
 			>Ver Mas</button

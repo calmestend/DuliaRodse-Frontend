@@ -26,7 +26,13 @@
 	<h2>Numero de inventario: {currentProduct.inventoryId}</h2>
 	<h2>Existencia: {currentProduct.existence}</h2>
 	{#if data.authenticated}
-		<input type="number" placeholder="cantidad a agregar" bind:value={quantity} />
+		<input
+			type="number"
+			min="1"
+			max={currentProduct.existence}
+			placeholder="cantidad a agregar"
+			bind:value={quantity}
+		/>
 		<button on:click={() => addProductToShoppingCart(currentProduct, quantity)}
 			>Anadir al carrito</button
 		>

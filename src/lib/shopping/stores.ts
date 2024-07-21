@@ -3,8 +3,6 @@ import { writable } from 'svelte/store';
 
 export const shoppingCart = writable<ProductShoppingCart[]>([]);
 
-shoppingCart.subscribe(console.log);
-
 export function addProductToShoppingCart(product: ProductInventory, quantity: number) {
 	shoppingCart.update((previousProducts) => {
 		const existingProduct = previousProducts.find(

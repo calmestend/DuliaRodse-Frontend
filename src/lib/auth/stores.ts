@@ -55,3 +55,37 @@ export async function fillClientsStores() {
 		});
 	});
 }
+
+export async function updateClient(client: Client) {
+	const clientUpdated: ClientServerData = {
+		ID_CLIE: client.id,
+		NI_CLIE: client.name,
+		AP_CLIE: client.firstLastname,
+		AM_CLIE: client.secondLastname,
+		COL_CLIE: client.neighborhood,
+		CALLE_CLIE: client.street,
+		NOINT_CLIE: client.intNumber,
+		NOEXT_CLIE: client.extNumber,
+		CP_CLIE: client.zipCode,
+		EMAIL_CLIE: client.email,
+		RFC_CLIE: client.rfc,
+		TEL_CLIE: client.phoneNumber,
+		ID_USU: client.userId,
+		CVE_CIUDAD: client.city
+	};
+	const response = await fetch('http://localhost/duliarodse/back/api/cliente/update.php', {
+		body: JSON.stringify(clientUpdated),
+		method: 'POST'
+	});
+
+	const parsedResponse = await response.json();
+
+	if (parsedResponse.message === 'Post created') {
+		await fillClientsStores();
+		return { message: 'Cliente actualizado' };
+	}
+
+	return {
+		message: 'Ocurrio un error en nuestro servidor'
+	};
+}

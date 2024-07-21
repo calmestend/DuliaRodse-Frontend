@@ -9,7 +9,9 @@ export const load: LayoutServerLoad = async ({ fetch }) => {
 
 	if (authenticated !== undefined && authenticated === true) {
 		recoverShoppingCart();
-		return { authenticated: authenticated };
+		return {
+			authenticated: authenticated
+		};
 	}
 
 	clearLocalStorage();

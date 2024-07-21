@@ -119,3 +119,25 @@ export interface ProductInventory {
 export interface ProductShoppingCart extends ProductInventory {
 	quantity: number;
 }
+
+export type CityServerData = {
+	CVE_CIUDAD: number;
+	NOM_CIUDAD: string;
+	CVE_ESTADO: number;
+};
+
+export type City = {
+	id: number;
+	stateId: number;
+	name: string;
+};
+
+export type StateServerData = {
+	CVE_ESTADO: number;
+	NOM_ESTADO: string;
+};
+
+export type State = {
+	id: number;
+	name: string;
+};

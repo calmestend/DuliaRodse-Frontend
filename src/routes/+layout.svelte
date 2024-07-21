@@ -8,7 +8,7 @@
 <nav>
 	<ul>
 		<li><a href="/">DuliaRodse</a></li>
-		<BranchSelection />
+		<BranchSelection message={'Productos'} />
 		{#if data.authenticated}
 			<li><a href="/shoppingCart">Carrito de compras</a></li>
 			<form action="/?/logout" method="POST">
