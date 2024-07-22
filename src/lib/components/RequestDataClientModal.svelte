@@ -37,5 +37,5 @@
 
 {#if renderCheckout}
 	<h2>Elige el metodo de pago</h2>
-	<PaypalButton bind:cartTotal />
+	<PaypalButton bind:cartTotal clientId={currentClient.id} />
 {/if}

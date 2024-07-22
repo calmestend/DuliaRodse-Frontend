@@ -3,14 +3,11 @@
 	import type { PageData } from '../$types';
 	import BranchSelection from '$lib/components/BranchSelection.svelte';
 	import RequestClientData from '$lib/components/RequestClientData.svelte';
-	import { clientsStores } from '$lib/auth/stores';
-	import type { Client, User } from '$lib/types';
+	import type { Client } from '$lib/types';
 
 	export let data: PageData;
 
-	const user: User = data.user;
-	const clients: Client[] = $clientsStores;
-	const currentClient = clients.find((client) => client.userId === user.id);
+	const client: Client = data.client;
 </script>
 
 {#if $shoppingCart}
@@ -28,15 +25,10 @@
 		<p>
 			Subtotal: {$shoppingCart.reduce((acc, product) => acc + product.quantity * product.price, 0)} $
 		</p>
-		{#if currentClient}
-			<RequestClientData
-				cartTotal={$shoppingCart.reduce(
-					(acc, product) => acc + product.quantity * product.price,
-					0
-				)}
-				{currentClient}
-			/>
-		{/if}
+		<RequestClientData
+			cartTotal={$shoppingCart.reduce((acc, product) => acc + product.quantity * product.price, 0)}
+			currentClient={client}
+		/>
 	{:else}
 		<h2>Carrito Vacio</h2>
 		<BranchSelection message="Ver Productos" />

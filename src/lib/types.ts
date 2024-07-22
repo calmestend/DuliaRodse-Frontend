@@ -90,7 +90,7 @@ export type ProductInventoryServerData = {
 	NO_SUC: number;
 	NO_INV: number;
 	EXIST_INV: string;
-	ID_PRO: string;
+	ID_PRO: number;
 	NOM_PRO: string;
 	GRAM_PRO: string;
 	COS_PRO: string;
@@ -105,7 +105,7 @@ export interface ProductInventory {
 	branchId: number;
 	inventoryId: number;
 	existence: number;
-	id: string;
+	id: number;
 	name: string;
 	grammage: number;
 	cost: number;
@@ -140,4 +140,25 @@ export type StateServerData = {
 export type State = {
 	id: number;
 	name: string;
+};
+
+export type SaleServerData = {
+	CVE_VENTA: number;
+	FEC_VENTA: string;
+	PAGO_VENTA: string;
+	ID_CLIE: number;
+};
+
+export type PaymentServerData = {
+	CVE_PAGO: number;
+	FEC_PAGO: string;
+	CANT_PAGO: string;
+	TIP_PAGO: string;
+	CVE_VENTA: number;
+};
+
+export type SaleInventoryServerData = {
+	CVE_VENTA: number;
+	NO_INV: number;
+	CANT_PRO: number;
 };
