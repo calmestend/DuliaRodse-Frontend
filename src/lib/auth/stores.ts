@@ -85,6 +85,7 @@ export async function updateClient(client: Client) {
 		return { message: 'Cliente actualizado' };
 	}
 
+	await fillClientsStores();
 	return {
 		message: 'Ocurrio un error en nuestro servidor'
 	};
