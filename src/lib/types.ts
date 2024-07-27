@@ -162,3 +162,27 @@ export type SaleInventoryServerData = {
 	NO_INV: number;
 	CANT_PRO: number;
 };
+
+export type PurchaseRecordServerData = {
+	CVE_VENTA: number;
+	ID_CLIE: number;
+	FEC_VENTA: string;
+	NO_INV: number;
+	ID_PRO: number;
+	NOM_PRO: string;
+	PREC_PRO: string;
+	CANT_PRO: number;
+	PAGO_VENTA: string;
+};
+
+export type PurchaseRecord = {
+	saleId: number;
+	clientId: number;
+	saleDate: string;
+	inventoryId: number;
+	productId: number;
+	productName: string;
+	productPrice: number;
+	productQuantity: number;
+	amount: number;
+};
