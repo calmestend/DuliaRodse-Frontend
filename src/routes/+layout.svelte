@@ -1,8 +1,13 @@
 <script lang="ts">
 	import BranchSelection from '$lib/components/BranchSelection.svelte';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
-
+	import { fillBranchesStores } from '$lib/inventory/stores';
 	export let data: PageData;
+
+	onMount(() => {
+		fillBranchesStores();
+	});
 </script>
 
 <nav>

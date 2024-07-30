@@ -1,15 +1,10 @@
 <script lang="ts">
-	import { branchesStores, fillBranchesStores } from '$lib/inventory/stores';
-	import { onMount } from 'svelte';
+	import { branchesStores } from '$lib/inventory/stores';
 	import BranchSelectionModal from './BranchSelectionModal.svelte';
 
 	let showModal = false;
 
 	export let message: string;
-
-	onMount(() => {
-		fillBranchesStores();
-	});
 
 	let branchId: number = 1;
 </script>
