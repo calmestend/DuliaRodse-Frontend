@@ -27,6 +27,7 @@ export async function createClientQuery(
 		const getUsers = await fetch('http://localhost/duliarodse/back/api/usuario/read.php');
 		const parsedGetUsers = await getUsers.json();
 		const users: UserServerData[] = parsedGetUsers.data;
+
 		const userCreated: UserServerData | undefined = users.find((user) => user.NOM_USU === username);
 		const user: User = {
 			id: userCreated?.ID_USU ?? 0,

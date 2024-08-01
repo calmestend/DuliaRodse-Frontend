@@ -1,5 +1,5 @@
 import { fillProductsInventoryStores } from '$lib/inventory/stores';
-import { shoppingCart } from '$lib/shopping/stores';
+import { fillShoppingHistory, shoppingCart, shoppingHistory } from '$lib/shopping/stores';
 import type { PaymentServerData, SaleInventoryServerData, SaleServerData } from '$lib/types';
 import { get } from 'svelte/store';
 
@@ -107,4 +107,6 @@ export async function processPayment(
 	});
 	shoppingCart.set([]);
 	await fillProductsInventoryStores();
+	shoppingHistory.set([]);
+	await fillShoppingHistory();
 }

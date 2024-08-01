@@ -8,8 +8,8 @@ import { writable } from 'svelte/store';
 
 export const shoppingCart = writable<ProductShoppingCart[]>([]);
 export const shoppingHistory = writable<PurchaseRecord[]>([]);
+export const clientShoppingHistory = writable<PurchaseRecord[]>([]);
 
-shoppingHistory.subscribe(console.log);
 fillShoppingHistory();
 
 export function addProductToShoppingCart(product: ProductInventory, quantity: number) {
@@ -57,6 +57,33 @@ export async function fillShoppingHistory() {
 		};
 
 		shoppingHistory.update((previousPurchases) => {
+			return [...previousPurchases, newPurchaseRecord];
+		});
+	});
+}
+
+export async function fillClientShoppingHistory(id_clie: number) {
+	const response = await fetch(
+		`http://localhost/duliarodse/back/api/venta/read_shopping_history_by_client.php?id_clie=${id_clie}`
+	);
+
+	const parsedResponse = await response.json();
+	const purchaseRecords: PurchaseRecordServerData[] = parsedResponse.data;
+
+	purchaseRecords.map((purchase) => {
+		const newPurchaseRecord: PurchaseRecord = {
+			saleId: purchase.CVE_VENTA,
+			clientId: purchase.ID_CLIE,
+			saleDate: purchase.FEC_VENTA,
+			inventoryId: purchase.NO_INV,
+			productId: purchase.ID_PRO,
+			productName: purchase.NOM_PRO,
+			productPrice: parseFloat(purchase.PREC_PRO),
+			productQuantity: purchase.CANT_PRO,
+			amount: parseFloat(purchase.PAGO_VENTA)
+		};
+
+		clientShoppingHistory.update((previousPurchases) => {
 			return [...previousPurchases, newPurchaseRecord];
 		});
 	});
