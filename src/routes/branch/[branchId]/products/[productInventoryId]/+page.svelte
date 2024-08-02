@@ -45,5 +45,5 @@
 		<p>Aun no contamos con resenas, se el primero en hacerlo uwu</p>
 	{/if}
 {:else}
-	<p>Cargando producto...</p>
+	<p>El producto no existe</p>
 {/if}

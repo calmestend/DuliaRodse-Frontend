@@ -6,13 +6,15 @@ import type { ProductInventory, Review } from '$lib/types';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const productInventoryId = params.productInventoryId;
+	const currentBranchId = params.branchId;
 
 	const products = get(productsInventoryStores);
 	const currentProduct: ProductInventory | undefined = products.find(
 		(productInventory) =>
 			productInventory.inventoryId === parseInt(productInventoryId) &&
 			productInventory.existence > 0 &&
-			productInventory.active
+			productInventory.active &&
+			productInventory.branchId === parseInt(currentBranchId)
 	);
 
 	productReviews.set([]);
