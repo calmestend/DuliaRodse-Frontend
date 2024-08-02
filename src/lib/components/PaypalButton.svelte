@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { loadScript } from '@paypal/paypal-js';
 	import { PAYPAL_CLIENT_ID } from '$lib/constants';
-	import { beforeNavigate, goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { processPayment } from '$lib/payment/queries';
+	import { currentPaymentId } from '$lib/payment/stores';
+	import { get } from 'svelte/store';
 
 	export let cartTotal: number;
 	export let clientId: number;
@@ -33,6 +35,7 @@
 				onApprove: async function (data, actions) {
 					return await actions.order.capture().then(async function (details) {
 						let amount: string = '0';
+						currentPaymentId.update(() => details.id ?? '');
 						if (details.purchase_units !== undefined) {
 							amount =
 								details.purchase_units[0].amount?.value !== undefined
@@ -43,13 +46,13 @@
 							if (details.create_time) {
 								time = details.create_time;
 								await processPayment(time, clientId, fundingSource, amount, amount);
-								goto('/checkout/success');
 							}
 						}
+						goto(`/checkout/${get(currentPaymentId)}`);
 					});
 				},
 				onError: function (err) {
-					alert('Something went wrong');
+					alert('Ocurrio un error');
 					console.log('Something went wrong', err);
 				}
 			})

@@ -1,21 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { productsInventoryStores } from '$lib/inventory/stores';
-	import type { ProductInventory } from '$lib/types';
 	import type { PageData } from '../$types';
 	import { goto } from '$app/navigation';
 	import { addProductToShoppingCart } from '$lib/shopping/stores';
-
-	const productInventoryId = $page.params.productInventoryId;
-
-	let currentProduct: ProductInventory | undefined = $productsInventoryStores.find(
-		(productInventory) =>
-			productInventory.inventoryId === parseInt(productInventoryId) &&
-			productInventory.existence > 0 &&
-			productInventory.active
-	);
+	import type { ProductInventory, Review } from '$lib/types';
 
 	export let data: PageData;
+	const currentProduct: ProductInventory = data.currentProduct;
+	const currentReviews: Review[] = data.currentReviews;
+	console.log(data);
+	console.log(currentProduct);
+	console.log(currentReviews);
 	let quantity = 1;
 </script>
 
@@ -39,6 +33,16 @@
 	{:else}
 		<p>Inicia sesion para anadir al carrito</p>
 		<button on:click={() => goto('/auth/login')}>Iniciar sesion</button>
+	{/if}
+	<h2>Resenas del producto</h2>
+	{#if currentReviews.length > 0}
+		{#each currentReviews as review}
+			<p>Estrellas: {review.scaleId}</p>
+			<p>Comentario: {review.commentary}</p>
+			<hr />
+		{/each}
+	{:else}
+		<p>Aun no contamos con resenas, se el primero en hacerlo uwu</p>
 	{/if}
 {:else}
 	<p>Cargando producto...</p>

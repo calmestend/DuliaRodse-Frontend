@@ -8,6 +8,7 @@ import { writable } from 'svelte/store';
 
 export const branchesStores = writable<Branch[]>([]);
 export const productsInventoryStores = writable<ProductInventory[]>([]);
+export const productInventoryStore = writable<ProductInventory>();
 
 fillProductsInventoryStores();
 

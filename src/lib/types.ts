@@ -186,3 +186,19 @@ export type PurchaseRecord = {
 	productQuantity: number;
 	amount: number;
 };
+
+export type ReviewServerData = {
+	ID_REV: number;
+	ID_ESC: number;
+	ID_CLIE: number;
+	ID_PRO: number;
+	COM_REV: string;
+};
+
+export type Review = {
+	id: number;
+	scaleId: number;
+	clientId: number;
+	productId: number;
+	commentary: string;
+};

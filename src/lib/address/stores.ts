@@ -12,6 +12,7 @@ export async function fillCitiesStores() {
 	const parsedResponse = await response.json();
 
 	const cities: CityServerData[] = parsedResponse.data;
+
 	cities.map((city) => {
 		const newCity: City = {
 			id: city.CVE_CIUDAD,
