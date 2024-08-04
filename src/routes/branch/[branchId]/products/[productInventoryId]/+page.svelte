@@ -7,9 +7,6 @@
 	export let data: PageData;
 	const currentProduct: ProductInventory = data.currentProduct;
 	const currentReviews: Review[] = data.currentReviews;
-	console.log(data);
-	console.log(currentProduct);
-	console.log(currentReviews);
 	let quantity = 1;
 </script>
 

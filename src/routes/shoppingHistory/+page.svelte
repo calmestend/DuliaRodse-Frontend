@@ -4,11 +4,15 @@
 	import type { PurchaseRecord } from '$lib/types';
 	import BranchSelection from '$lib/components/BranchSelection.svelte';
 	import { onMount } from 'svelte';
+	import AddReview from '$lib/components/AddReview.svelte';
+	import UpdateReview from '$lib/components/UpdateReview.svelte';
 
 	export let data: PageData;
 
 	let purchasesBySaleId: Record<number, PurchaseRecord[]>;
 	const reviews = data.currentReviews;
+	const currentReview = (purchase: PurchaseRecord) =>
+		reviews.find((review) => review.productId === purchase.productId);
 
 	onMount(async () => {
 		clientShoppingHistory.set([]);
@@ -37,10 +41,15 @@
 			<p>Precio del producto: {purchase.productPrice}</p>
 			<p>Cantidad: {purchase.productQuantity}</p>
 			<p>Numero de inventario: {purchase.inventoryId}</p>
-			{#if reviews.find((review) => review.productId === purchase.productId)}
-				<button>Modificar reseña</button>
+			{#if currentReview(purchase)}
+				<UpdateReview
+					id_rev={currentReview(purchase)?.id ?? 0}
+					id_clie={data.client?.id ?? 0}
+					id_esc={currentReview(purchase)?.scaleId ?? 0}
+					com_rev={currentReview(purchase)?.commentary ?? ''}
+				/>
 			{:else}
-				<button>Agregar reseña</button>
+				<AddReview id_pro={purchase.productId} id_clie={data.client?.id ?? 0} />
 			{/if}
 		{/each}
 	{/each}

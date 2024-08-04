@@ -21,7 +21,6 @@
 		<slot name="header" />
 		<hr />
 		<slot />
-		<!-- svelte-ignore a11y-autofocus -->
 		<button
 			on:click={() => {
 				addProductToShoppingCart(product, quantity);
