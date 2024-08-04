@@ -43,23 +43,25 @@ export async function fillShoppingHistory() {
 	const parsedResponse = await response.json();
 	const purchaseRecords: PurchaseRecordServerData[] = parsedResponse.data;
 
-	purchaseRecords.map((purchase) => {
-		const newPurchaseRecord: PurchaseRecord = {
-			saleId: purchase.CVE_VENTA,
-			clientId: purchase.ID_CLIE,
-			saleDate: purchase.FEC_VENTA,
-			inventoryId: purchase.NO_INV,
-			productId: purchase.ID_PRO,
-			productName: purchase.NOM_PRO,
-			productPrice: parseFloat(purchase.PREC_PRO),
-			productQuantity: purchase.CANT_PRO,
-			amount: parseFloat(purchase.PAGO_VENTA)
-		};
+	if (parsedResponse.data) {
+		purchaseRecords.map((purchase) => {
+			const newPurchaseRecord: PurchaseRecord = {
+				saleId: purchase.CVE_VENTA,
+				clientId: purchase.ID_CLIE,
+				saleDate: purchase.FEC_VENTA,
+				inventoryId: purchase.NO_INV,
+				productId: purchase.ID_PRO,
+				productName: purchase.NOM_PRO,
+				productPrice: parseFloat(purchase.PREC_PRO),
+				productQuantity: purchase.CANT_PRO,
+				amount: parseFloat(purchase.PAGO_VENTA)
+			};
 
-		shoppingHistory.update((previousPurchases) => {
-			return [...previousPurchases, newPurchaseRecord];
+			shoppingHistory.update((previousPurchases) => {
+				return [...previousPurchases, newPurchaseRecord];
+			});
 		});
-	});
+	}
 }
 
 export async function fillClientShoppingHistory(id_clie: number) {

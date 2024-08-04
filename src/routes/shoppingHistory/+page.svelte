@@ -30,10 +30,9 @@
 	});
 </script>
 
-<!--TODO: Merge into one table if have the same purchase id-->
 <h1>Historial de compras</h1>
 {#if purchasesBySaleId && Object.keys(purchasesBySaleId).length > 0}
-	{#each Object.entries(purchasesBySaleId) as [saleId, purchases]}
+	{#each Object.entries(purchasesBySaleId).reverse() as [saleId, purchases]}
 		<h2>Venta ID: {saleId}</h2>
 		<h3>Fecha: {purchases[0].saleDate}</h3>
 		{#each purchases as purchase}

@@ -202,3 +202,9 @@ export type Review = {
 	productId: number;
 	commentary: string;
 };
+
+export type BillServerData = {
+	CVE_FACTURA: number;
+	FEC_FACTURA: string;
+	CVE_VENTA: number;
+};
