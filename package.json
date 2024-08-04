@@ -33,6 +33,7 @@
 	"type": "module",
 	"dependencies": {
 		"@paypal/paypal-js": "^8.1.0",
+		"pdfmake": "^0.2.10",
 		"uuid": "^10.0.0"
 	}
 }
