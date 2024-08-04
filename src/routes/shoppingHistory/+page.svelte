@@ -8,6 +8,7 @@
 	export let data: PageData;
 
 	let purchasesBySaleId: Record<number, PurchaseRecord[]>;
+	const reviews = data.currentReviews;
 
 	onMount(async () => {
 		clientShoppingHistory.set([]);
@@ -22,7 +23,6 @@
 				{} as Record<number, PurchaseRecord[]>
 			);
 		}
-		console.log(purchasesBySaleId);
 	});
 </script>
 
@@ -31,12 +31,17 @@
 {#if purchasesBySaleId && Object.keys(purchasesBySaleId).length > 0}
 	{#each Object.entries(purchasesBySaleId) as [saleId, purchases]}
 		<h2>Venta ID: {saleId}</h2>
+		<h3>Fecha: {purchases[0].saleDate}</h3>
 		{#each purchases as purchase}
-			<p>Fecha: {purchase.saleDate}</p>
 			<p>Nombre del producto: {purchase.productName}</p>
 			<p>Precio del producto: {purchase.productPrice}</p>
 			<p>Cantidad: {purchase.productQuantity}</p>
-			<button>Agregar reseña</button>
+			<p>Numero de inventario: {purchase.inventoryId}</p>
+			{#if reviews.find((review) => review.productId === purchase.productId)}
+				<button>Modificar reseña</button>
+			{:else}
+				<button>Agregar reseña</button>
+			{/if}
 		{/each}
 	{/each}
 {:else}
