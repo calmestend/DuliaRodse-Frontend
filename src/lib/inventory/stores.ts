@@ -55,7 +55,8 @@ export async function fillBranchesStores() {
 			extNumber: branch?.NOEXT_SUC,
 			zipCode: branch?.CP_SUC,
 			cityName: branch?.NOM_CIUDAD,
-			stateName: branch?.NOM_ESTADO
+			stateName: branch?.NOM_ESTADO,
+			active: branch?.ACTIVO === 1 ? true : false
 		};
 
 		branchesStores.update((previousBranches) => {

@@ -20,7 +20,9 @@
 		<label for="branches">Sucursales</label>
 		<select name="branches" id="branches" bind:value={branchId} size="1">
 			{#each $branchesStores as branch}
-				<option value={branch.id}>{branch.cityName}, {branch.stateName}</option>
+				{#if branch.active}
+					<option value={branch.id}>{branch.cityName}, {branch.stateName}</option>
+				{/if}
 			{/each}
 		</select>
 		<button

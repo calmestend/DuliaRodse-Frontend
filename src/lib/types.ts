@@ -63,6 +63,7 @@ export type BranchServerData = {
 	CP_SUC: string;
 	NOM_CIUDAD: string;
 	NOM_ESTADO: string;
+	ACTIVO: number;
 };
 
 export type BranchServerLoad = {
@@ -73,6 +74,7 @@ export type BranchServerLoad = {
 	NOEXT_SUC: string;
 	CP_SUC: string;
 	CVE_CIUDAD: number;
+	ACTIVO: number;
 };
 
 export type Branch = {
@@ -84,6 +86,7 @@ export type Branch = {
 	zipCode: string;
 	cityName: string;
 	stateName: string;
+	active: boolean;
 };
 
 export type ProductInventoryServerData = {
