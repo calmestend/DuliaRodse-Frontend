@@ -5,12 +5,13 @@ export const load: LayoutServerLoad = async ({ fetch }) => {
 	const result = await fetch('/api/validate-user');
 	const parsedResult = await result.json();
 
-	const { authenticated } = parsedResult;
+	const { authenticated, user } = parsedResult;
 
 	if (authenticated !== undefined && authenticated === true) {
 		recoverShoppingCart();
 		return {
-			authenticated: authenticated
+			authenticated,
+			user
 		};
 	}
 

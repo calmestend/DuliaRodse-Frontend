@@ -26,6 +26,7 @@ export function generateBillPDF(billData: BillPDFDataServerData[]) {
 
 	const purchaseId = billData[0].CVE_PAGO;
 	const purchaseAmount = billData[0].CANT_PAGO;
+	const purchaseType = billData[0].TIP_PAGO;
 	const saleAmount = billData[0].PAGO_VENTA;
 
 	const document: TDocumentDefinitions = {
@@ -61,7 +62,8 @@ export function generateBillPDF(billData: BillPDFDataServerData[]) {
 			{ text: 'Pago:' },
 			{ text: `N° de Pago: ${purchaseId}` },
 			{ text: `Fecha de Pago: ${date}` },
-			{ text: `Cantidad Pagada: ${purchaseAmount}` }
+			{ text: `Cantidad Pagada: ${purchaseAmount}` },
+			{ text: `Metodo de pago: ${purchaseType}` }
 		]
 	};
 

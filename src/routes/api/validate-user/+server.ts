@@ -7,8 +7,8 @@ export const GET: RequestHandler = async ({ cookies }) => {
 
 	if (sessionCookie) {
 		try {
-			validationSession(sessionCookie);
-			return json({ authenticated: true });
+			const user = validationSession(sessionCookie).userResult;
+			return json({ authenticated: true, user });
 		} catch {
 			cookies.delete(SESSION_COOKIE_NAME, { path: '/' });
 			return json({ authenticated: false });

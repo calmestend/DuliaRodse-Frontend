@@ -266,3 +266,27 @@ export type BillPDFData = {
 	productPrice: string;
 	import: string;
 };
+
+export type ProductServerData = {
+	ID_PRO: number;
+	NOM_PRO: string;
+	GRAM_PRO: string;
+	COS_PRO: string;
+	PREC_PRO: string;
+	IMG_PRO: string;
+	ID_CAT: number;
+	AROMA_PRO: string;
+	ACTIVO: number;
+};
+
+export type Product = {
+	id: number;
+	name: string;
+	grammage: number;
+	cost: number;
+	price: number;
+	img: string;
+	categorieId: number;
+	scent: string;
+	active: boolean;
+};

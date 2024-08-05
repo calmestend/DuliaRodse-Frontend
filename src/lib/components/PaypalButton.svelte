@@ -53,7 +53,7 @@
 				},
 				onError: function (err) {
 					alert('Ocurrio un error');
-					console.log('Something went wrong', err);
+					console.error('Something went wrong', err);
 				}
 			})
 			.render('#paypal-button-container');
