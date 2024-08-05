@@ -114,7 +114,7 @@ export interface ProductInventory {
 	cost: number;
 	price: number;
 	img: string;
-	nameCategorie: string;
+	nameCategory: string;
 	scent: string;
 	active: boolean;
 }
@@ -289,7 +289,17 @@ export type Product = {
 	cost: number;
 	price: number;
 	img: string;
-	categorieId: number;
+	categoryId: number;
 	scent: string;
 	active: boolean;
+};
+
+export type CategoryServerData = {
+	ID_CAT: number;
+	NOM_CAT: string;
+};
+
+export type Category = {
+	id: number;
+	name: string;
 };

@@ -88,12 +88,12 @@
 	/>
 
 	<br />
-	<label for="categorieId">Categoria</label>
+	<label for="categoryId">Categoria</label>
 	<input
 		type="text"
-		bind:value={product.categorieId}
-		name="categorieId"
-		id="categorieId"
+		bind:value={product.categoryId}
+		name="categoryId"
+		id="categoryId"
 		disabled={!editing || productToEdit !== product}
 	/>
 	<br />

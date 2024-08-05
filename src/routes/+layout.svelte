@@ -18,9 +18,8 @@
 				<li><a href="/admin">Reportes</a></li>
 				<li><a href="/admin/inventory">Inventario</a></li>
 				<li><a href="/admin/branch">Sucursales</a></li>
-				<li><a href="/admin/categorie">Categorias</a></li>
+				<li><a href="/admin/category">Categorias</a></li>
 				<li><a href="/admin/product">Productos</a></li>
-				<li><a href="/admin/user">Usuarios</a></li>
 			{:else}
 				<li><a href="/">DuliaRodse</a></li>
 				<BranchSelection message={'Productos'} />

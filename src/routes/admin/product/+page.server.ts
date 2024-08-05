@@ -1,11 +1,11 @@
-import { fillProductStores, productsStore } from '$lib/inventory/stores';
+import { fillProductStores, productsStores } from '$lib/inventory/stores';
 import { get } from 'svelte/store';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	productsStore.set([]);
+	productsStores.set([]);
 	await fillProductStores();
-	const currentProducts = get(productsStore);
+	const currentProducts = get(productsStores);
 	return {
 		currentProducts
 	};

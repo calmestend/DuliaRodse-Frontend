@@ -17,6 +17,6 @@
 			<ModifyProduct bind:product />
 		{/each}
 	{:else}
-		<p>No existen productos actualmente...</p>
+		<p>No hay productos existentes...</p>
 	{/if}
 </div>
