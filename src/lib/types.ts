@@ -220,6 +220,7 @@ export type BillPDFDataServerData = {
 	NOEXT_CLIE: string;
 	CP_CLIE: string;
 	EMAIL_CLIE: string;
+	RFC_CLIE: string;
 	NOM_CIUDAD: string;
 	NOM_ESTADO: string;
 	CVE_VENTA: number;
@@ -250,6 +251,7 @@ export type BillPDFData = {
 	clientEmail: string;
 	clientCity: string;
 	clientState: string;
+	clientRfc: string;
 	saleId: number;
 	date: string;
 	saleAmount: string;

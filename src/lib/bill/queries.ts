@@ -1,4 +1,5 @@
 import { getLastPurchase } from '$lib/payment/queries';
+import { generateBillPDF } from '$lib/pdf/bill';
 import type { BillPDFDataServerData } from '$lib/types';
 
 // Search bill per saleID
@@ -22,6 +23,6 @@ export async function createBillPDF(clientId: number) {
 
 	if (purchase) {
 		const billPDFData: BillPDFDataServerData[] = await getBill(purchase.CVE_VENTA);
-		console.log(billPDFData);
+		return generateBillPDF(billPDFData);
 	}
 }
