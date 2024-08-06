@@ -24,12 +24,12 @@
 			placeholder="cantidad a agregar"
 			bind:value={quantity}
 		/>
-		<button on:click={() => addProductToShoppingCart(currentProduct, quantity)}
+		<button class="btn" on:click={() => addProductToShoppingCart(currentProduct, quantity)}
 			>Anadir al carrito</button
 		>
 	{:else}
 		<p>Inicia sesion para anadir al carrito</p>
-		<button on:click={() => goto('/auth/login')}>Iniciar sesion</button>
+		<button class="btn" on:click={() => goto('/auth/login')}>Iniciar sesion</button>
 	{/if}
 	<h2>Resenas del producto</h2>
 	{#if currentReviews.length > 0}

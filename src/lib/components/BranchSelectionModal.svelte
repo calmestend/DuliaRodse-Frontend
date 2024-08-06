@@ -12,11 +12,68 @@
 	on:click|self={() => dialog.close()}
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation>
+	<div on:click|stopPropagation class="dialog-content">
 		<slot name="header" />
-		<hr />
 		<slot />
-		<!-- svelte-ignore a11y-autofocus -->
-		<button autofocus on:click={() => dialog.close()}>Salir</button>
+		<div class="button-container">
+			<button class="btn exit" autofocus on:click={() => dialog.close()}>Salir</button>
+			<slot name="footer" />
+		</div>
 	</div>
 </dialog>
+
+<style lang="scss">
+	:global(dialog[open]::backdrop) {
+		backdrop-filter: blur(3px); /* Efecto de desenfoque en el fondo */
+		background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+	}
+
+	dialog {
+		width: 66vw; /* Ancho por defecto para móviles */
+		max-width: 100vw; /* Ancho máximo para dispositivos grandes */
+		height: auto; /* Ancho por defecto para móviles */
+		max-height: 33vh; /* Ancho máximo para dispositivos grandes */
+		border: none;
+		border-radius: 8px;
+		background: #f0f8ff; /* Color de fondo del modal */
+	}
+
+	.dialog-content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 1rem;
+	}
+
+	.exit {
+		background-color: #111;
+		border: 1px solid #000;
+		color: #f0f8ff;
+		padding: 0.5rem 1rem; /* Añadido padding para el botón */
+	}
+
+	@media (min-width: 320px) {
+		dialog {
+			width: 88vw; /* Ancho por defecto para móviles */
+			max-height: 33vh; /* Ancho máximo para dispositivos grandes */
+			font-size: 1rem;
+		}
+
+		.dialog-content {
+			font-size: 1rem; /* Tamaño de fuente para dispositivos muy pequeños */
+		}
+	}
+	@media (min-width: 768px) {
+		dialog {
+			width: 66vw; /* Ancho para pantallas grandes de escritorio */
+			height: 33vh; /* Ancho para pantallas grandes de escritorio */
+		}
+	}
+
+	@media (min-width: 1024px) {
+		dialog {
+			width: 33vw; /* Ancho para pantallas grandes de escritorio */
+			height: 25vh; /* Ancho para pantallas grandes de escritorio */
+		}
+	}
+</style>

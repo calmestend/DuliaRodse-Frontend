@@ -17,5 +17,5 @@
 	<input type="number" name="id_esc" min="1" max="5" bind:value={id_esc} />
 
 	<label for="com_rev">Comentario</label>
-	<input type="textarea" bind:value={com_rev} placeholder="Escribe tu comentario" />
+	<textarea name="com_rev" bind:value={com_rev} placeholder="Escribe tu comentario"></textarea>
 </AddReviewModal>

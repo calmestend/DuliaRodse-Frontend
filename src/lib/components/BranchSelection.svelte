@@ -3,35 +3,54 @@
 	import BranchSelectionModal from './BranchSelectionModal.svelte';
 
 	let showModal = false;
+	let branchId: number = 1;
+	let redirectUrl: string = '';
 
 	export let message: string;
 
-	let branchId: number = 1;
+	function openModal() {
+		showModal = true;
+		redirectUrl = `/branch/${branchId}/products`; // Guardar la URL de redirección
+	}
+
+	function handleRedirect() {
+		showModal = false;
+		// La redirección se maneja después de que el modal se haya cerrado
+		window.location.href = redirectUrl;
+	}
 </script>
 
-<li>
-	<a href={`/branch/${branchId}/products`} on:click|preventDefault={() => (showModal = true)}
-		>{message}</a
-	>
-</li>
+<button class="btn" on:click={openModal}>
+	{message}
+</button>
+
 <BranchSelectionModal bind:showModal>
 	<h2 slot="header">Elige la sucursal de la que deseas ver los productos</h2>
 	{#if $branchesStores}
-		<label for="branches">Sucursales</label>
-		<select name="branches" id="branches" bind:value={branchId} size="1">
-			{#each $branchesStores as branch}
-				{#if branch.active}
-					<option value={branch.id}>{branch.cityName}, {branch.stateName}</option>
-				{/if}
-			{/each}
-		</select>
-		<button
-			on:click={() => {
-				showModal = false;
-				window.location.href = `/branch/${branchId}/products`;
-			}}>Ver Productos</button
-		>
+		<div class="branch-selection">
+			<label for="branches">Sucursales 👉</label>
+			<select name="branches" id="branches" bind:value={branchId} size="1">
+				{#each $branchesStores as branch}
+					{#if branch.active}
+						<option value={branch.id}>{branch.cityName}, {branch.stateName} </option>
+					{/if}
+				{/each}
+			</select>
+		</div>
+		<button class="btn view-products" on:click={handleRedirect}>Ver Productos</button>
 	{:else}
 		<p>Cargando sucursales...</p>
 	{/if}
 </BranchSelectionModal>
+
+<style lang="scss">
+	.branch-selection {
+		display: flex;
+		align-items: center;
+		gap: 0.6em; /* Espacio entre el texto y el select */
+	}
+
+	.view-products {
+		margin: 1em 0;
+	}
+</style>

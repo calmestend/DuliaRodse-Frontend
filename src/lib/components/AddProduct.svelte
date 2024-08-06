@@ -7,7 +7,9 @@
 	export let product: ProductInventory;
 </script>
 
-<button type="button" on:click|preventDefault={() => (showModal = true)}>Anadir producto</button>
+<button class="btn" type="button" on:click|preventDefault={() => (showModal = true)}
+	>Anadir producto</button
+>
 
 <AddProductModal bind:quantity bind:product bind:showModal>
 	<h2 slot="header">{product.name}</h2>

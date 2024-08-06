@@ -22,11 +22,12 @@
 		<hr />
 		<slot />
 		<button
+			class="btn"
 			on:click={() => {
 				addProductToShoppingCart(product, quantity);
 				dialog.close();
 			}}>Agregar al carrito</button
 		>
-		<button on:click={() => dialog.close()}>Salir</button>
+		<button class="btn" on:click={() => dialog.close()}>Salir</button>
 	</div>
 </dialog>
