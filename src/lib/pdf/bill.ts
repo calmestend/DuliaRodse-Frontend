@@ -50,14 +50,14 @@ export function generateBillPDF(billData: BillPDFDataServerData[]) {
 						...billData.map((product) => [
 							product.CANT_PRO,
 							product.NOM_PRO,
-							product.PREC_PRO,
-							product.IMPORTE
+							(parseFloat(product.PREC_PRO) / 1.16).toFixed(2),
+							(parseFloat(product.IMPORTE) / 1.16).toFixed(2)
 						])
 					]
 				}
 			},
-			{ text: `Subtotal: ${parseInt(saleAmount) * 0.84}` },
-			`Iva 16%: ${parseInt(saleAmount) * 0.16}`,
+			{ text: `Subtotal: ${(parseFloat(saleAmount) / 1.16).toFixed(2)}` },
+			`Iva 16%: ${((parseFloat(saleAmount) / 1.16) * 0.16).toFixed(2)}`,
 			`TOTAL: ${saleAmount}`,
 			{ text: 'Pago:' },
 			{ text: `N° de Pago: ${purchaseId}` },

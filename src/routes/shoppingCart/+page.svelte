@@ -3,11 +3,20 @@
 	import type { PageData } from '../$types';
 	import BranchSelection from '$lib/components/BranchSelection.svelte';
 	import RequestClientData from '$lib/components/RequestClientData.svelte';
-	import type { Client } from '$lib/types';
+	import type { Client, ProductShoppingCart } from '$lib/types';
 
 	export let data: PageData;
 
 	const client: Client = data.client;
+
+	function validateQuantity(product: ProductShoppingCart, quantity: number) {
+		if (quantity > product.existence) {
+			return product.existence;
+		} else if (quantity < 1) {
+			return 1;
+		}
+		return quantity;
+	}
 </script>
 
 {#if $shoppingCart}
@@ -15,7 +24,12 @@
 		<p>Nombre: {product.name},</p>
 		<p>Precio: {product.price},</p>
 		<label for="quantity">Cantidad</label>
-		<input type="number" name="quantity" bind:value={product.quantity} />
+		<input
+			type="number"
+			name="quantity"
+			bind:value={product.quantity}
+			on:input={() => (product.quantity = validateQuantity(product, +product.quantity))}
+		/>
 		<button on:click={() => removeProductFromShoppingCart(product)}>Eliminar del carrito</button>
 		<p>Numero de inventario: {product.inventoryId}</p>
 		<p>Total: {product.quantity * product.price} $</p>

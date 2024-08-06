@@ -52,9 +52,9 @@
 	}
 
 	.product-card {
-		font-size: 4rem; /* Ajusta el tamaño de fuente en pantallas muy pequeñas */
+		font-size: 4rem;
 		position: relative;
-		min-height: 55vh; /* Altura mínima de las tarjetas */
+		min-height: 55vh;
 		background-image: url('../../../../assets/jabon.webp');
 		background-size: cover;
 		color: #f0f8ff;
@@ -121,24 +121,24 @@
 	}
 
 	.btn {
-		margin-top: auto; /* Empuja el botón hacia abajo para que esté al final de la tarjeta */
+		margin-top: auto;
 	}
 
 	@media (max-width: 480px) {
 		.product-card {
-			font-size: 0.8rem; /* Ajusta el tamaño de fuente en pantallas muy pequeñas */
+			font-size: 0.8rem;
 		}
 	}
 
 	@media (min-width: 768px) {
 		.products-container {
-			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Para pantallas medianas */
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 		}
 	}
 
 	@media (min-width: 1024px) {
 		.products-container {
-			grid-template-columns: repeat(3, 1fr); /* Para pantallas grandes */
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 </style>

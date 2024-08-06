@@ -3,30 +3,20 @@
 	import { goto } from '$app/navigation';
 	import { addProductToShoppingCart } from '$lib/shopping/stores';
 	import type { ProductInventory, Review } from '$lib/types';
+	import AddProduct from '$lib/components/AddProduct.svelte';
 
 	export let data: PageData;
 	const currentProduct: ProductInventory = data.currentProduct;
 	const currentReviews: Review[] = data.currentReviews;
-	let quantity = 1;
 </script>
 
-<!--TODO: Create component -->
 <!--TODO: Add add to cart modal window -->
 {#if currentProduct}
 	<h2>Nombre: {currentProduct.name}</h2>
 	<h2>Numero de inventario: {currentProduct.inventoryId}</h2>
 	<h2>Existencia: {currentProduct.existence}</h2>
 	{#if data.authenticated}
-		<input
-			type="number"
-			min="1"
-			max={currentProduct.existence}
-			placeholder="cantidad a agregar"
-			bind:value={quantity}
-		/>
-		<button class="btn" on:click={() => addProductToShoppingCart(currentProduct, quantity)}
-			>Anadir al carrito</button
-		>
+		<AddProduct product={currentProduct} />
 	{:else}
 		<p>Inicia sesion para anadir al carrito</p>
 		<button class="btn" on:click={() => goto('/auth/login')}>Iniciar sesion</button>

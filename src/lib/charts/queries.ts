@@ -2,6 +2,7 @@ import { fillShoppingHistory, shoppingHistory } from '$lib/shopping/stores';
 import { createChart } from 'lightweight-charts';
 import { get } from 'svelte/store';
 
+// Add automatic refresh
 export async function purchaseHistory(domElement: HTMLElement) {
 	shoppingHistory.set([]);
 	await fillShoppingHistory();

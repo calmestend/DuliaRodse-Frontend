@@ -4,19 +4,16 @@
 
 	let showModal = false;
 	let branchId: number = 1;
-	let redirectUrl: string = '';
 
 	export let message: string;
 
 	function openModal() {
 		showModal = true;
-		redirectUrl = `/branch/${branchId}/products`; // Guardar la URL de redirección
 	}
 
 	function handleRedirect() {
 		showModal = false;
-		// La redirección se maneja después de que el modal se haya cerrado
-		window.location.href = redirectUrl;
+		window.location.href = `/branch/${branchId}/products`;
 	}
 </script>
 
@@ -47,7 +44,7 @@
 	.branch-selection {
 		display: flex;
 		align-items: center;
-		gap: 0.6em; /* Espacio entre el texto y el select */
+		gap: 0.6em;
 	}
 
 	.view-products {
