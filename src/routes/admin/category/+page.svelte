@@ -1,5 +1,7 @@
 <script lang="ts">
+	import CreateCategory from '$lib/components/admin/CreateCategory.svelte';
 	import ModifyCategory from '$lib/components/admin/ModifyCategory.svelte';
+	import { createCategoriesReport } from '$lib/pdf/reports/category';
 	import type { Category } from '$lib/types';
 	import type { PageData } from '../$types';
 
@@ -8,8 +10,8 @@
 </script>
 
 <h1>Categoria</h1>
-<button>Crear Categoria</button>
-<button>Generar Reporte</button>
+<CreateCategory />
+<button on:click={() => createCategoriesReport(currentCategories)}>Generar Reporte</button>
 
 <div>
 	{#if currentCategories}

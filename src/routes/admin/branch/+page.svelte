@@ -1,5 +1,7 @@
 <script lang="ts">
+	import CreateBranch from '$lib/components/admin/CreateBranch.svelte';
 	import ModifyBranch from '$lib/components/admin/ModifyBranch.svelte';
+	import { createBranchesReport } from '$lib/pdf/reports/branch';
 	import type { BranchServer } from '$lib/types';
 	import type { PageData } from '../$types';
 
@@ -8,8 +10,8 @@
 </script>
 
 <h1>Sucursales</h1>
-<button>Crear Sucursal</button>
-<button>Generar Reporte</button>
+<CreateBranch />
+<button on:click={() => createBranchesReport(currentBranchesServer)}>Generar Reporte</button>
 
 <div>
 	{#if currentBranchesServer}

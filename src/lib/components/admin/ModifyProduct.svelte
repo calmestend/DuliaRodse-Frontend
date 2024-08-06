@@ -89,6 +89,7 @@
 
 	<br />
 	<label for="categoryId">Categoria</label>
+	<!-- ForEach option -->
 	<input
 		type="text"
 		bind:value={product.categoryId}

@@ -1,5 +1,7 @@
 <script lang="ts">
+	import CreateProduct from '$lib/components/admin/CreateProduct.svelte';
 	import ModifyProduct from '$lib/components/admin/ModifyProduct.svelte';
+	import { createProductsReport } from '$lib/pdf/reports/products';
 	import type { Product } from '$lib/types';
 	import type { PageData } from '../$types';
 
@@ -8,8 +10,8 @@
 </script>
 
 <h1>Productos</h1>
-<button>Crear producto</button>
-<button>Generar Reporte</button>
+<CreateProduct />
+<button on:click={() => createProductsReport(currentProducts)}>Generar Reporte</button>
 
 <div>
 	{#if currentProducts}

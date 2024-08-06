@@ -1,5 +1,7 @@
 <script lang="ts">
+	import AddProductInventory from '$lib/components/admin/AddProductInventory.svelte';
 	import ModifyInventory from '$lib/components/admin/ModifyInventory.svelte';
+	import { createProductsInventoryReport } from '$lib/pdf/reports/inventory';
 	import type { ProductInventory } from '$lib/types';
 	import type { PageData } from '../$types';
 
@@ -8,8 +10,10 @@
 </script>
 
 <h1>Inventario</h1>
-<button>Anadir producto al inventario</button>
-<button>Generar Reporte</button>
+<AddProductInventory />
+<button on:click={() => createProductsInventoryReport(currentProductsInventory)}
+	>Generar Reporte</button
+>
 
 <div>
 	{#if currentProductsInventory}

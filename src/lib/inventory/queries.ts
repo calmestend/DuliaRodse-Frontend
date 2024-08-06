@@ -9,6 +9,29 @@ import type {
 	ProductInventoryServerLoad
 } from '$lib/types';
 
+export async function createProductInventory(product: ProductInventory) {
+	const newProductInventory: ProductInventoryServerLoad = {
+		NO_SUC: product.branchId,
+		ID_PRO: product.id,
+		NO_INV: product.inventoryId,
+		EXIST_INV: product.existence
+	};
+
+	const response = await fetch(
+		'http://localhost/duliarodse/back/api/producto/create_into_inventory.php',
+		{
+			method: 'POST',
+			body: JSON.stringify(newProductInventory)
+		}
+	);
+
+	const parsedResponse = await response.json();
+	if (parsedResponse.message === 'Post created') {
+		location.reload();
+	}
+	location.reload();
+}
+
 export async function updateProductInventory(product: ProductInventory) {
 	const productUpdated: ProductInventoryServerLoad = {
 		NO_SUC: product.branchId,
