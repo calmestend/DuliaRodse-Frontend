@@ -6,7 +6,9 @@ import type {
 	ProductInventoryServerData,
 	ProductServerData,
 	CategoryServerData,
-	Category
+	Category,
+	BranchServer,
+	BranchServerLoad
 } from '$lib/types';
 import { writable } from 'svelte/store';
 
@@ -15,9 +17,37 @@ export const productsInventoryStores = writable<ProductInventory[]>([]);
 export const productInventoryStore = writable<ProductInventory>();
 export const productsStores = writable<Product[]>([]);
 export const categoriesStores = writable<Category[]>([]);
+export const branchesServerStores = writable<BranchServer[]>([]);
 
 fillProductsInventoryStores();
 fillCategoriesStores();
+
+export async function fillBranchServerLoad() {
+	const response = await fetch(
+		'http://localhost/duliarodse/back/api/sucursal/read_without_direction.php'
+	);
+	const parsedResponse = await response.json();
+
+	if (parsedResponse.data) {
+		const branchesServer: BranchServerLoad[] = parsedResponse.data;
+		branchesServer.map((branch) => {
+			const newBranch: BranchServer = {
+				id: branch.NO_SUC,
+				neighborhood: branch.COL_SUC,
+				street: branch.CALLE_SUC,
+				intNumber: branch.NOINT_SUC,
+				extNumber: branch.NOEXT_SUC,
+				zipCode: branch.CP_SUC,
+				city: branch.CVE_CIUDAD,
+				active: branch.ACTIVO ? true : false
+			};
+
+			branchesServerStores.update((previousBranches) => {
+				return [...previousBranches, newBranch];
+			});
+		});
+	}
+}
 
 export async function fillCategoriesStores() {
 	const response = await fetch('http://localhost/duliarodse/back/api/categoria/read.php');

@@ -10,7 +10,7 @@
 	const branchId = $page.params.branchId;
 </script>
 
-{#if $branchesStores.find((branch) => branch.id === parseInt(branchId))}
+{#if $branchesStores.find((branch) => branch.id === parseInt(branchId) && branch.active)}
 	{#each $productsInventoryStores as product}
 		{#if product.branchId === parseInt(branchId) && product.active && product.existence > 0}
 			<h2>{product.name}</h2>

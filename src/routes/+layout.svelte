@@ -27,7 +27,7 @@
 				<li><a href="/shoppingHistory">Historial de compras</a></li>
 			{/if}
 			<form action="/?/logout" method="POST">
-				<button formaction="/?/logout">Log Out</button>
+				<button formaction="/?/logout">Cerrar Sesion</button>
 			</form>
 		{:else}
 			<li><a href="/">DuliaRodse</a></li>

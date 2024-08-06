@@ -77,6 +77,17 @@ export type BranchServerLoad = {
 	ACTIVO: number;
 };
 
+export type BranchServer = {
+	id: number;
+	neighborhood: string;
+	street: string;
+	intNumber: string;
+	extNumber: string;
+	zipCode: string;
+	city: number;
+	active: boolean;
+};
+
 export type Branch = {
 	id: number;
 	neighborhood: string;
@@ -102,6 +113,13 @@ export type ProductInventoryServerData = {
 	NOM_CAT: string;
 	AROMA_PRO: string;
 	ACTIVO: number;
+};
+
+export type ProductInventoryServerLoad = {
+	NO_SUC: number;
+	NO_INV: number;
+	EXIST_INV: number;
+	ID_PRO: number;
 };
 
 export interface ProductInventory {
