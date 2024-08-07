@@ -9,7 +9,9 @@
 	};
 </script>
 
-<button type="button" on:click|preventDefault={() => (showModal = true)}>Crear Categoria</button>
+<button class="btn" type="button" on:click|preventDefault={() => (showModal = true)}
+	>Crear Categoria</button
+>
 
 <CreateCategoryModal bind:category bind:showModal>
 	<h2 slot="header">Inserta los datos de la categoria</h2>

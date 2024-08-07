@@ -22,28 +22,106 @@
 			stopEditing();
 		}
 	}
+
+	function validateExistence(event: Event) {
+		const input = event.target as HTMLInputElement;
+		let existence = parseFloat(input.value);
+		if (isNaN(existence) || existence < 0) {
+			existence = 0;
+		}
+		product.existence = existence;
+	}
 </script>
 
-<form action="/admin/product">
-	<h2 id="product">{product.name}</h2>
-	<p>Numero de inventario: {product.inventoryId}</p>
-	<p>Producto id: {product.id}</p>
-	<p>{product.active ? 'Producto Activo' : 'Producto Inactivo'}</p>
-	<p>Nombre: {product.name}</p>
-	<p>Costo: {product.cost}</p>
-	<p>Precio: {product.price}</p>
-	<!-- TODO: Add img -->
-	<label for="existence">Existencia</label>
-	<input
-		type="number"
-		bind:value={product.existence}
-		name="existence"
-		disabled={!editing || productToEdit !== product}
-	/>
+<div class="product-card">
+	<h2>{product.name}</h2>
+	<div class="product-details">
+		<div class="detail">
+			<label for="inventoryId">Número de inventario:</label>
+			<span id="inventoryId">{product.inventoryId}</span>
+		</div>
+		<div class="detail">
+			<label for="productId">Producto ID:</label>
+			<span id="productId">{product.id}</span>
+		</div>
+		<div class="detail">
+			<label for="status">Estado:</label>
+			<span id="status">{product.active ? 'Producto Activo' : 'Producto Inactivo'}</span>
+		</div>
+		<div class="detail">
+			<label for="name">Nombre:</label>
+			<span id="name">{product.name}</span>
+		</div>
+		<div class="detail">
+			<label for="cost">Costo:</label>
+			<span id="cost">{product.cost}</span>
+		</div>
+		<div class="detail">
+			<label for="price">Precio:</label>
+			<span id="price">{product.price}</span>
+		</div>
+		<div class="detail">
+			<label for="branchId">Sucursal:</label>
+			<span id="branchId">{product.branchId}</span>
+		</div>
+		<div class="detail">
+			<label for="existence">Existencia:</label>
+			<input
+				type="number"
+				bind:value={product.existence}
+				id="existence"
+				name="existence"
+				min="0"
+				on:input={validateExistence}
+				disabled={!editing || productToEdit !== product}
+			/>
+		</div>
+	</div>
 
-	{#if editing && productToEdit === product}
-		<button on:click={applyChanges}>Aplicar cambios</button>
-	{:else}
-		<button on:click={() => startEditing(product)}>Actualizar</button>
-	{/if}
-</form>
+	<div class="buttons">
+		{#if editing && productToEdit === product}
+			<button class="btn" type="button" on:click={applyChanges}>Aplicar cambios</button>
+			<button class="btn" type="button" on:click={stopEditing}>Cancelar</button>
+		{:else}
+			<button class="btn" type="button" on:click={() => startEditing(product)}>Actualizar</button>
+		{/if}
+	</div>
+</div>
+
+<style lang="scss">
+	.product-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+	}
+
+	.product-details {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.detail {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.detail label {
+		font-weight: bold;
+	}
+
+	.detail span,
+	.detail input {
+		font-size: 1rem;
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1rem;
+	}
+</style>

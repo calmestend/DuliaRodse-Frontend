@@ -5,6 +5,25 @@
 	export let showModal: boolean;
 	export let product: Product;
 	let dialog: HTMLDialogElement;
+	let errorMessage = '';
+
+	async function createProductWithValidation() {
+		if (product.name.trim() === '') {
+			errorMessage = 'El nombre del producto no puede estar vacío.';
+
+			return;
+		}
+
+		if (product.scent.trim() === '') {
+			errorMessage = 'El aroma del producto no puede estar vacío.';
+
+			return;
+		}
+
+		await createProduct(product);
+
+		dialog.close();
+	}
 
 	$: if (dialog && showModal) dialog.showModal();
 </script>
@@ -20,12 +39,11 @@
 		<slot name="header" />
 		<hr />
 		<slot />
-		<button
-			on:click={() => {
-				createProduct(product);
-				dialog.close();
-			}}>Crear Producto</button
-		>
+		{#if errorMessage}
+			<p style="color: red;">{errorMessage}</p>
+		{/if}
+		<button on:click={() => createProductWithValidation()}>Crear Producto</button>
+
 		<button on:click={() => dialog.close()}>Salir</button>
 	</div>
 </dialog>

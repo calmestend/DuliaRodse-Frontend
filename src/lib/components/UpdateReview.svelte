@@ -9,7 +9,7 @@
 	export let com_rev: string;
 </script>
 
-<button on:click|preventDefault={() => (showModal = true)}>Actualiza tu resena</button>
+<button class="btn" on:click|preventDefault={() => (showModal = true)}>Actualiza tu resena</button>
 <UpdateReviewModal bind:showModal bind:id_clie bind:id_rev bind:id_esc bind:com_rev>
 	<h2 slot="header">Actualiza la resena de tu producto</h2>
 	<label for="id_esc">Calificacion</label>

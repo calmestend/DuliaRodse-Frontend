@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { citiesStores } from '$lib/address/stores';
 	import type { BranchServer } from '$lib/types';
 	import CreateBranchModal from './modals/CreateBranchModal.svelte';
 
@@ -15,12 +16,18 @@
 	};
 </script>
 
-<button type="button" on:click|preventDefault={() => (showModal = true)}>Crear Sucursal</button>
+<button class="btn" type="button" on:click|preventDefault={() => (showModal = true)}
+	>Crear Sucursal</button
+>
 
 <CreateBranchModal bind:branch bind:showModal>
 	<h2 slot="header">Inserta los datos de la sucursal</h2>
 	<label for="city">Ciudad</label>
-	<input type="text" name="city" bind:value={branch.city} />
+	<select name="city" bind:value={branch.city}>
+		{#each $citiesStores as city}
+			<option value={city.id}>{city.name}</option>
+		{/each}
+	</select>
 	<br />
 	<label for="neighborhood">Colonia</label>
 	<input type="text" name="neighborhood" bind:value={branch.neighborhood} />

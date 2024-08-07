@@ -1,9 +1,0 @@
-import type { ProductInventory } from '$lib/types';
-
-export function validateQuantity(product: ProductInventory, quantity: number) {
-	if (quantity > product.existence) {
-		quantity = product.existence;
-	} else if (quantity < 1) {
-		quantity = 1;
-	}
-}

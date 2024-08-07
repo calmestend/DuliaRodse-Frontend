@@ -14,7 +14,7 @@
 	<div class="products-container">
 		{#each $productsInventoryStores as product}
 			{#if product.branchId === parseInt(branchId) && product.active && product.existence > 0}
-				<div class="product-card">
+				<div class="product-card" style="background-image: url({product.img});">
 					<div class="product-content">
 						<div class="product-header">
 							<p>{product.name}</p>
@@ -55,8 +55,8 @@
 		font-size: 4rem;
 		position: relative;
 		min-height: 55vh;
-		background-image: url('../../../../assets/jabon.webp');
 		background-size: cover;
+		background-position: center;
 		color: #f0f8ff;
 		border-radius: 8px;
 		overflow: hidden;

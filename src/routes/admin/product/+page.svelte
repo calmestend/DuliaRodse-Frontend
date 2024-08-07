@@ -10,15 +10,40 @@
 </script>
 
 <h1>Productos</h1>
-<CreateProduct />
-<button on:click={() => createProductsReport(currentProducts)}>Generar Reporte</button>
+<div class="buttons">
+	<CreateProduct />
+	<button class="btn" on:click={() => createProductsReport(currentProducts)}>Generar Reporte</button
+	>
+</div>
 
-<div>
-	{#if currentProducts}
+<div class="gallery">
+	{#if currentProducts && currentProducts.length > 0}
 		{#each currentProducts as product}
-			<ModifyProduct bind:product />
+			<div class="gallery-item">
+				<ModifyProduct {product} />
+			</div>
 		{/each}
 	{:else}
 		<p>No hay productos existentes...</p>
 	{/if}
 </div>
+
+<style lang="scss">
+	.buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1em;
+		padding: 1em;
+	}
+
+	.gallery {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1em;
+		padding: 1em;
+	}
+
+	.gallery-item {
+		flex: 1 1 calc(33% - 16px); // Tres elementos por fila, ajusta según el diseño
+	}
+</style>

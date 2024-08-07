@@ -10,7 +10,7 @@
 	let com_rev = '';
 </script>
 
-<button on:click|preventDefault={() => (showModal = true)}>Anade una resena</button>
+<button class="btn" on:click|preventDefault={() => (showModal = true)}>Anade una resena</button>
 <AddReviewModal bind:showModal bind:id_clie bind:id_pro bind:id_esc bind:com_rev>
 	<h2 slot="header">Anade una resena al producto :3</h2>
 	<label for="id_esc">Calificacion</label>
