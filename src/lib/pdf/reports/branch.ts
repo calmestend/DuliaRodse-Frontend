@@ -9,21 +9,22 @@ export function createBranchesReport(branches: BranchServer[]) {
 	const document: TDocumentDefinitions = {
 		content: [
 			{ text: 'Reporte', style: 'header' },
-			'DuliaRodse S.A de C.V',
+			{ text: 'DuliaRodse S.A de C.V', style: 'subheader' },
 			{ text: 'Sucursales', style: 'subheader' },
 			{
-				style: 'branch',
+				style: 'table',
 				table: {
+					widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
 					body: [
 						[
-							'Numero Sucursal',
-							'Clave Ciudad',
-							'Colonia',
-							'Calle',
-							'Codigo Postal',
-							'Numero Interior',
-							'Numero Exterior',
-							'Activo'
+							{ text: 'Número Sucursal', style: 'tableHeader' },
+							{ text: 'Clave Ciudad', style: 'tableHeader' },
+							{ text: 'Colonia', style: 'tableHeader' },
+							{ text: 'Calle', style: 'tableHeader' },
+							{ text: 'Código Postal', style: 'tableHeader' },
+							{ text: 'Número Interior', style: 'tableHeader' },
+							{ text: 'Número Exterior', style: 'tableHeader' },
+							{ text: 'Activo', style: 'tableHeader' }
 						],
 						...branches.map((branch) => [
 							branch.id,
@@ -38,7 +39,34 @@ export function createBranchesReport(branches: BranchServer[]) {
 					]
 				}
 			}
-		]
+		],
+		styles: {
+			header: {
+				fontSize: 18,
+				bold: true,
+				margin: [0, 10, 0, 10],
+				color: '#1e1e1e'
+			},
+			subheader: {
+				fontSize: 14,
+				bold: true,
+				margin: [0, 5, 0, 5],
+				color: '#1e1e1e'
+			},
+			table: {
+				margin: [0, 10, 0, 10]
+			},
+			tableHeader: {
+				bold: true,
+				fontSize: 13,
+				color: '#ffffff',
+				fillColor: '#1e1e1e'
+			}
+		},
+		defaultStyle: {
+			fontSize: 12,
+			color: '#1e1e1e'
+		}
 	};
 
 	try {

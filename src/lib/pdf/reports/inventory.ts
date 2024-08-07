@@ -9,13 +9,19 @@ export function createProductsInventoryReport(products: ProductInventory[]) {
 	const document: TDocumentDefinitions = {
 		content: [
 			{ text: 'Reporte', style: 'header' },
-			'DuliaRodse S.A de C.V',
+			{ text: 'DuliaRodse S.A de C.V', style: 'subheader' },
 			{ text: 'Inventario', style: 'subheader' },
 			{
-				style: 'inventory',
+				style: 'table',
 				table: {
+					widths: ['auto', 'auto', 'auto', 'auto'],
 					body: [
-						['Producto ID', 'Numero de Sucursal', 'Numero de Inventario', 'Existencia'],
+						[
+							{ text: 'Producto ID', style: 'tableHeader' },
+							{ text: 'Número de Sucursal', style: 'tableHeader' },
+							{ text: 'Número de Inventario', style: 'tableHeader' },
+							{ text: 'Existencia', style: 'tableHeader' }
+						],
 						...products.map((product) => [
 							product.id,
 							product.branchId,
@@ -25,7 +31,34 @@ export function createProductsInventoryReport(products: ProductInventory[]) {
 					]
 				}
 			}
-		]
+		],
+		styles: {
+			header: {
+				fontSize: 18,
+				bold: true,
+				margin: [0, 10, 0, 10],
+				color: '#1e1e1e'
+			},
+			subheader: {
+				fontSize: 14,
+				bold: true,
+				margin: [0, 5, 0, 5],
+				color: '#1e1e1e'
+			},
+			table: {
+				margin: [0, 10, 0, 10]
+			},
+			tableHeader: {
+				bold: true,
+				fontSize: 13,
+				color: '#ffffff',
+				fillColor: '#1e1e1e'
+			}
+		},
+		defaultStyle: {
+			fontSize: 12,
+			color: '#1e1e1e'
+		}
 	};
 
 	try {

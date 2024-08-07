@@ -31,22 +31,28 @@ export function generateBillPDF(billData: BillPDFDataServerData[]) {
 
 	const document: TDocumentDefinitions = {
 		content: [
-			{ text: 'Factura', style: 'billInformation' },
-			'DuliaRodse S.A de C.V',
-			'N° de Factura: ' + billId,
-			'Fecha: ' + date,
-			'N° de Venta: ' + saleId,
-			{ text: 'Facturar a:', style: 'billInformation' },
+			{ text: 'Factura', style: 'header' },
+			{ text: 'DuliaRodse S.A de C.V', style: 'subheader' },
+			{ text: `N° de Factura: ${billId}`, style: 'subheader' },
+			{ text: `Fecha: ${date}`, style: 'subheader' },
+			{ text: `N° de Venta: ${saleId}`, style: 'subheader' },
+			{ text: 'Facturar a:', style: 'header' },
 			`Nombre: ${client.name} ${client.firstLastName} ${client.secondLastName}`,
 			`RFC: ${client.rfc}`,
-			'Direccion:',
+			'Dirección:',
 			`${client.neighborhood}, ${client.street}, ${client.intNumber} ${client.extNumber}`,
 			`${client.zipCode}, ${client.city} ${client.state}`,
 			{
-				style: 'products',
+				style: 'table',
 				table: {
+					widths: ['auto', '*', 'auto', 'auto'],
 					body: [
-						['Cantidad', 'Producto', 'Precio Unitario', 'Importe'],
+						[
+							{ text: 'Cantidad', style: 'tableHeader' },
+							{ text: 'Producto', style: 'tableHeader' },
+							{ text: 'Precio Unitario', style: 'tableHeader' },
+							{ text: 'Importe', style: 'tableHeader' }
+						],
 						...billData.map((product) => [
 							product.CANT_PRO,
 							product.NOM_PRO,
@@ -56,15 +62,45 @@ export function generateBillPDF(billData: BillPDFDataServerData[]) {
 					]
 				}
 			},
-			{ text: `Subtotal: ${(parseFloat(saleAmount) / 1.16).toFixed(2)}` },
-			`Iva 16%: ${((parseFloat(saleAmount) / 1.16) * 0.16).toFixed(2)}`,
-			`TOTAL: ${saleAmount}`,
-			{ text: 'Pago:' },
-			{ text: `N° de Pago: ${purchaseId}` },
-			{ text: `Fecha de Pago: ${date}` },
-			{ text: `Cantidad Pagada: ${purchaseAmount}` },
-			{ text: `Metodo de pago: ${purchaseType}` }
-		]
+			{ text: `Subtotal: ${(parseFloat(saleAmount) / 1.16).toFixed(2)}`, style: 'subheader' },
+			{
+				text: `IVA 16%: ${((parseFloat(saleAmount) / 1.16) * 0.16).toFixed(2)}`,
+				style: 'subheader'
+			},
+			{ text: `TOTAL: ${saleAmount}`, style: 'subheader' },
+			{ text: 'Pago:', style: 'header' },
+			{ text: `N° de Pago: ${purchaseId}`, style: 'subheader' },
+			{ text: `Fecha de Pago: ${date}`, style: 'subheader' },
+			{ text: `Cantidad Pagada: ${purchaseAmount}`, style: 'subheader' },
+			{ text: `Método de pago: ${purchaseType}`, style: 'subheader' }
+		],
+		styles: {
+			header: {
+				fontSize: 18,
+				bold: true,
+				margin: [0, 10, 0, 10],
+				color: '#1e1e1e'
+			},
+			subheader: {
+				fontSize: 14,
+				bold: true,
+				margin: [0, 5, 0, 5],
+				color: '#1e1e1e'
+			},
+			table: {
+				margin: [0, 10, 0, 10]
+			},
+			tableHeader: {
+				bold: true,
+				fontSize: 13,
+				color: '#ffffff',
+				fillColor: '#1e1e1e'
+			}
+		},
+		defaultStyle: {
+			fontSize: 12,
+			color: '#1e1e1e'
+		}
 	};
 
 	try {

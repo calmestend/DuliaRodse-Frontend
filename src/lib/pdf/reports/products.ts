@@ -7,24 +7,26 @@ export function createProductsReport(products: Product[]) {
 	pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 	const document: TDocumentDefinitions = {
+		pageOrientation: 'landscape',
 		content: [
 			{ text: 'Reporte', style: 'header' },
-			'DuliaRodse S.A de C.V',
+			{ text: 'DuliaRodse S.A de C.V', style: 'subheader' },
 			{ text: 'Productos', style: 'subheader' },
 			{
-				style: 'products',
+				style: 'table',
 				table: {
+					widths: [20, 80, 60, 60, 60, 150, 60, 50, 60],
 					body: [
 						[
-							'ID',
-							'Nombre',
-							'Gramaje',
-							'Costo',
-							'Precio',
-							'Nombre imagen',
-							'Categoria ID',
-							'Aroma',
-							'Activo'
+							{ text: 'ID', style: 'tableHeader' },
+							{ text: 'Nombre', style: 'tableHeader' },
+							{ text: 'Gramaje', style: 'tableHeader' },
+							{ text: 'Costo', style: 'tableHeader' },
+							{ text: 'Precio', style: 'tableHeader' },
+							{ text: 'Nombre imagen', style: 'tableHeader' },
+							{ text: 'Categoria ID', style: 'tableHeader' },
+							{ text: 'Aroma', style: 'tableHeader' },
+							{ text: 'Activo', style: 'tableHeader' }
 						],
 						...products.map((product) => [
 							product.id,
@@ -40,7 +42,30 @@ export function createProductsReport(products: Product[]) {
 					]
 				}
 			}
-		]
+		],
+		styles: {
+			header: {
+				fontSize: 16,
+				bold: true,
+				color: '#1e1e1e'
+			},
+			subheader: {
+				fontSize: 18,
+				bold: true,
+				color: '#1e1e1e'
+			},
+			table: {},
+			tableHeader: {
+				bold: true,
+				fontSize: 14,
+				color: '#ffffff',
+				fillColor: '#1e1e1e'
+			}
+		},
+		defaultStyle: {
+			fontSize: 12,
+			color: '#1e1e1e'
+		}
 	};
 
 	try {
