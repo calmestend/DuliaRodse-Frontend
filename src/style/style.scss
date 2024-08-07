@@ -18,6 +18,14 @@ dialog {
   height: 2em;
   font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  /* Transición para el botón */
+}
+
+.btn:hover {
+  background-color: #111;
+  color: #F0F8FF;
+  /* Color de fondo cuando se hace hover */
 }
 
 a {
@@ -33,10 +41,12 @@ textarea {
   display: flex;
   align-items: center;
   background-color: #F0F8FF;
-  padding: 0.5rem .8rem;
+  padding: 0.5rem 0.8rem;
   border: 1px solid #000;
   color: #111;
   font-size: 1rem;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  /* Transición para inputs */
 }
 
 input[type="text"]:focus,
@@ -45,25 +55,49 @@ input[type="email"]:focus,
 textarea:focus {
   outline: none;
   border-color: #000;
-  background-color: #F0F8FF;
+  background-color: #E6F7FF;
+  /* Color de fondo cuando está activo */
+}
 
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+input[type="email"]:disabled,
+input[type="number"]:disabled,
+textarea:disabled {
+  background-color: #111;
+  border-color: #F0F8FF;
+  color: #F0F8FF;
+  cursor: not-allowed;
+  /* Estilos para inputs desactivados */
 }
 
 select {
   display: flex;
   align-items: center;
   background-color: #F0F8FF;
-  padding: 0.5rem .8rem;
+  padding: 0.5rem 0.8rem;
   border: 1px solid #000;
   color: #111;
   font-size: 1rem;
   cursor: pointer;
   appearance: none;
   outline: none;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  /* Transición para select */
 }
 
 select:focus {
   border-color: #000;
+  background-color: #E6F7FF;
+  /* Color de fondo cuando está activo */
+}
+
+select:disabled {
+  background-color: #111;
+  border-color: #F0F8FF;
+  color: #F0F8FF;
+  cursor: not-allowed;
+  /* Estilos para select desactivado */
 }
 
 option {

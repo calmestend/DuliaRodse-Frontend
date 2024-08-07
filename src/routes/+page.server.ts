@@ -1,8 +1,9 @@
 import { signOut } from '$lib/auth/auth';
 import { SESSION_COOKIE_NAME } from '$lib/constants';
-import { fail, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 import fs from 'fs';
 import path from 'path';
+import type { PageServerLoad } from './$types';
 
 export const actions: Actions = {
 	logout: async ({ cookies }) => {
@@ -74,4 +75,11 @@ export const actions: Actions = {
 			})
 		};
 	}
+};
+
+export const load: PageServerLoad = async ({ locals }) => {
+	if (locals.session?.userRole == 'admin') {
+		return redirect(302, '/admin');
+	}
+	return { admin: false };
 };

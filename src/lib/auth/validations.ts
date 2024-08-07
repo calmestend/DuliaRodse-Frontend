@@ -53,10 +53,7 @@ export function validationEmail(email: string) {
 }
 
 export function validationPassword(password: string) {
-	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&:()])[A-Za-z\d@$!%*?&]{8,}$/;
-	const passwordRegexExec = passwordRegex.exec(password);
-
-	if (passwordRegexExec && passwordRegexExec[0] === password) {
+	if (password.length > 8) {
 		return {
 			success: true
 		};
@@ -64,8 +61,7 @@ export function validationPassword(password: string) {
 
 	return {
 		error: true,
-		message:
-			'La contrasena debe contar con al menos 8 caracteres, una letra minuscula (`a-z`), al menos una letra mayuscula (`A-Z`), al menos un digito (`0-9`), al menos un caracter especial '
+		message: 'La contrasena debe contar con al menos 8 caracteres'
 	};
 }
 

@@ -13,6 +13,7 @@
 {#if currentProduct}
 	<div class="product-detail-card">
 		<h2>{currentProduct.name}</h2>
+		<h3>{currentProduct.nameCategory}</h3>
 		<h3>
 			Producto de la Sucursal:
 			{$branchesStores.find((branch) => branch.id === currentProduct.branchId)?.cityName},

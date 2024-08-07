@@ -19,6 +19,9 @@
 						<div class="product-header">
 							<p>{product.name}</p>
 						</div>
+						<div class="product-header">
+							<p>{product.nameCategory}</p>
+						</div>
 						<div class="product-price">
 							<p class="new">$ {product.price}</p>
 						</div>
